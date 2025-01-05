@@ -23,20 +23,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.aupal.vocabank.ViewModelFactory
+import com.aupal.vocabank.data.VocabData
+import com.aupal.vocabank.di.Injection
 import com.aupal.vocabank.ui.component.SectionText
 import com.aupal.vocabank.ui.theme.VocabankTheme
 
 @Composable
 fun AddScreen(
-    modifier : Modifier = Modifier
+    modifier : Modifier = Modifier,
+    viewModel: AddViewModel = viewModel(
+        factory = ViewModelFactory(Injection.provideRepository(LocalContext.current))
+    )
 ){
+
     var vocab by remember{ mutableStateOf(TextFieldValue("")) }
     var meaning by remember{ mutableStateOf(TextFieldValue("")) }
     var example by remember{ mutableStateOf(TextFieldValue("")) }
-
 
     Column(
         modifier = modifier
@@ -75,7 +83,15 @@ fun AddScreen(
             }
         )
         Button(
-            onClick = {  },
+            onClick = {
+                viewModel.addVocab(
+                    VocabData(
+                        vocab = vocab.text,
+                        meaning = meaning.text,
+                        sentence = example.text,
+                    )
+                )
+            },
             content = {
                 Text("Submit")
             },

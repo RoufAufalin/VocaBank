@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "944955650425",
+    "project_id": "vocapps-8d480",
+    "storage_bucket": "vocapps-8d480.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944955650425:android:10172b871021e41f48bfa8",
+        "android_client_info": {
+          "package_name": "com.aupal.vocabank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeUHbD_6g6FeT_wGl9r5IRunZYaH95Fgk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

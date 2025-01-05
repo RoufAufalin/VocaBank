@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.aupal.vocabank" />
+                  <option name="mobileSdkAppId" value="1:944955650425:android:10172b871021e41f48bfa8" />
+                  <option name="projectId" value="vocapps-8d480" />
+                  <option name="projectNumber" value="944955650425" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
