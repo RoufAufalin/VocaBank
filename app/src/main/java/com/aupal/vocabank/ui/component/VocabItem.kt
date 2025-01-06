@@ -53,7 +53,7 @@ fun VocabItem(
                 .fillMaxHeight()
         ) {
             Text(
-                vocabData.vocab,
+                vocabData.vocab!!,
                 fontFamily = InterFamily,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier

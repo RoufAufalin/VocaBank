@@ -27,7 +27,6 @@ class Repository(private val db : FirebaseFirestore) {
 
         try {
             val snapshot = db.collection("vocab").get().await()
-
             for (document in snapshot) {
                 val vocab = document.toObject(VocabData::class.java)
                 vocab.documentId = document.id

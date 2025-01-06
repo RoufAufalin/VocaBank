@@ -6,13 +6,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class VocabData(
     val id: Int = 0,
-    val vocab: String,
-    val meaning: String,
-    val sentence: String,
+    val vocab: String? = null,
+    val meaning: String? = null,
+    val sentence: String? = null,
     var documentId: String? = null
 ) : Parcelable {
 
-    fun toMap(): Map<String, Any> {
+    fun toMap(): Map<String, String?> {
         return mapOf(
             "vocab" to vocab,
             "meaning" to meaning,

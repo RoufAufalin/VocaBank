@@ -86,6 +86,9 @@ fun AddScreen(
                                         sentence = example.text
                                     )
                                 )
+                                vocab = TextFieldValue("")
+                                meaning = TextFieldValue("")
+                                example = TextFieldValue("")
                             },
                         )
                     }

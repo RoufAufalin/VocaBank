@@ -31,8 +31,6 @@ import kotlinx.coroutines.launch
 fun VocabankApp(
     modifier: Modifier = Modifier,
 ){
-    val data = listOf("Wow", "Rouf", "Aufalin")
-
     val tabs = listOf(
         ScreenData("Add") { AddScreen() },
         ScreenData("Vocabulary") { ListScreen() },
@@ -45,14 +43,20 @@ fun VocabankApp(
         tabs.size
     }
 
-    LaunchedEffect(selectedTabIndex) {
-        pagerState.animateScrollToPage(selectedTabIndex)
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(pagerState.currentPage) {
+        selectedTabIndex = pagerState.currentPage
     }
-    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
-        if(!pagerState.isScrollInProgress) {
-            selectedTabIndex = pagerState.currentPage
-        }
-    }
+
+//    LaunchedEffect(selectedTabIndex) {
+//        pagerState.animateScrollToPage(selectedTabIndex)
+//    }
+//    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
+//        if(!pagerState.isScrollInProgress) {
+//            selectedTabIndex = pagerState.currentPage
+//        }
+//    }
 
 
     Column {
@@ -64,6 +68,9 @@ fun VocabankApp(
                 Tab(
                     selected = index == selectedTabIndex,
                     onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
                         selectedTabIndex = index
                     },
                     text = {
