@@ -37,8 +37,6 @@ import com.aupal.vocabank.ui.theme.InterFamily
 fun ConfirmationDialog(
     onDismissRequest: () -> Unit,
     onConfirmation: () -> Unit,
-    painter: Painter,
-    imageDescription: String,
     modifier: Modifier = Modifier
 ) {
     Dialog(onDismissRequest = { onDismissRequest() }) {
@@ -57,8 +55,8 @@ fun ConfirmationDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
-                    painter = painter,
-                    contentDescription = imageDescription,
+                    painter = painterResource(R.drawable.dict),
+                    contentDescription = "Sample Image",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
                         .height(160.dp)
@@ -72,7 +70,9 @@ fun ConfirmationDialog(
                     modifier = Modifier.padding(16.dp),
                 )
                 Button(
-                    onClick = {  },
+                    onClick = {
+                        onConfirmation()
+                    },
                     content = {
                         Text("Submit")
                     },
@@ -85,7 +85,7 @@ fun ConfirmationDialog(
                 )
 
                 OutlinedButton(
-                    onClick = {  },
+                    onClick = { onDismissRequest() },
                     content = {
                         Text("No",
                             color = Color.Black)
@@ -108,7 +108,5 @@ fun ConfirmationDialogPreview() {
     ConfirmationDialog(
         onDismissRequest = {},
         onConfirmation = {},
-        painter = painterResource(id = R.drawable.dict),
-        imageDescription = "Sample Image",
     )
 }

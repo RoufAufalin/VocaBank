@@ -35,12 +35,11 @@ import com.aupal.vocabank.ui.theme.InterFamily
 @Composable
 fun ExistingDialog(
     onDismissRequest: () -> Unit,
-    onConfirmation: () -> Unit,
-    painter: Painter,
-    imageDescription: String,
     modifier: Modifier = Modifier
 ) {
-    Dialog(onDismissRequest = { onDismissRequest() }) {
+    Dialog(
+        onDismissRequest = { onDismissRequest() }
+    ) {
         Card(
             colors = androidx.compose.material3.CardDefaults.cardColors(Color.White),
             modifier = Modifier
@@ -56,8 +55,8 @@ fun ExistingDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
-                    painter = painter,
-                    contentDescription = imageDescription,
+                    painter = painterResource(R.drawable.dict),
+                    contentDescription = "Sample Image",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
                         .height(160.dp)
@@ -71,7 +70,7 @@ fun ExistingDialog(
                     modifier = Modifier.padding(16.dp),
                 )
                 Button(
-                    onClick = {  },
+                    onClick = { onDismissRequest() },
                     content = {
                         Text("Back")
                     },
@@ -92,8 +91,5 @@ fun ExistingDialog(
 fun ExistingDialogPreview() {
     ExistingDialog(
         onDismissRequest = {},
-        onConfirmation = {},
-        painter = painterResource(id = R.drawable.dict),
-        imageDescription = "Sample Image",
         )
 }

@@ -23,12 +23,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aupal.vocabank.data.VocabData
 import com.aupal.vocabank.ui.theme.InterFamily
 
 
 @Composable
 fun VocabItem(
-    string: String,
+    vocabData: VocabData,
     modifier: Modifier = Modifier
 ){
     ElevatedCard(
@@ -52,7 +53,7 @@ fun VocabItem(
                 .fillMaxHeight()
         ) {
             Text(
-                string,
+                vocabData.vocab,
                 fontFamily = InterFamily,
                 fontWeight = FontWeight.Bold,
                 modifier = modifier
@@ -69,5 +70,11 @@ fun VocabItem(
 @Preview(showBackground = true)
 @Composable
 fun VocabItemPreview(){
-    VocabItem(string = "Hello World")
+    VocabItem(
+        vocabData = VocabData(
+            vocab = "Wow",
+            meaning = "Wow",
+            sentence = "Wow"
+        )
+    )
 }

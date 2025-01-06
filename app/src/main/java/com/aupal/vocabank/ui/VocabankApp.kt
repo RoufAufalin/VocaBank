@@ -13,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +25,7 @@ import com.aupal.vocabank.ui.list.ListScreen
 import com.aupal.vocabank.ui.tabItem.ScreenData
 import com.aupal.vocabank.ui.theme.InterFamily
 import com.aupal.vocabank.ui.theme.VocabankTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun VocabankApp(
@@ -33,15 +35,16 @@ fun VocabankApp(
 
     val tabs = listOf(
         ScreenData("Add") { AddScreen() },
-        ScreenData("Vocabulary") { ListScreen(data) },
+        ScreenData("Vocabulary") { ListScreen() },
         ScreenData("About") { AboutScreen() },
     )
 
 
     var selectedTabIndex by remember { mutableStateOf(1) }
-    val pagerState = rememberPagerState{
+    val pagerState = rememberPagerState(initialPage = selectedTabIndex){
         tabs.size
     }
+
     LaunchedEffect(selectedTabIndex) {
         pagerState.animateScrollToPage(selectedTabIndex)
     }
