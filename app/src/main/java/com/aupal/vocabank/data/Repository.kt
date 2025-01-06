@@ -6,6 +6,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 class Repository(private val db : FirebaseFirestore) {
+
     suspend fun addVocab(vocabData: VocabData){
 
         db.collection("vocab")
@@ -15,7 +16,7 @@ class Repository(private val db : FirebaseFirestore) {
 
     suspend fun checkVocab(vocab: String): Boolean{
         val querySnapshot = db.collection("vocab")
-            .whereEqualTo("vocab", vocab)
+            .whereEqualTo("vocab", vocab.lowercase())
             .get()
             .await()
 

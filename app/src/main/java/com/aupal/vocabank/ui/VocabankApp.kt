@@ -49,15 +49,6 @@ fun VocabankApp(
         selectedTabIndex = pagerState.currentPage
     }
 
-//    LaunchedEffect(selectedTabIndex) {
-//        pagerState.animateScrollToPage(selectedTabIndex)
-//    }
-//    LaunchedEffect(pagerState.currentPage, pagerState.isScrollInProgress) {
-//        if(!pagerState.isScrollInProgress) {
-//            selectedTabIndex = pagerState.currentPage
-//        }
-//    }
-
 
     Column {
         TabRow(

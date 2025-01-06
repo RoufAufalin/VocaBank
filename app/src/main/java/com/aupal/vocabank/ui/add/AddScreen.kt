@@ -81,7 +81,7 @@ fun AddScreen(
                             onConfirmation = {
                                 viewModel.addVocab(
                                     VocabData(
-                                        vocab = vocab.text,
+                                        vocab = vocab.text.lowercase(),
                                         meaning = meaning.text,
                                         sentence = example.text
                                     )
