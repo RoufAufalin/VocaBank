@@ -30,19 +30,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aupal.vocabank.data.VocabData
 import com.aupal.vocabank.ui.component.SectionText
 import com.aupal.vocabank.ui.list.ListScreen
 import com.aupal.vocabank.ui.theme.InterFamily
 
 @Composable
 fun DetailScreen(
+    vocabData: VocabData,
     modifier: Modifier = Modifier,
 ){
-    val data = listOf(
-        "Wow",
-        "Rouf",
-        "Aufalin"
-    )
     Column(
         modifier = modifier.fillMaxSize()
     ) {
@@ -63,14 +60,14 @@ fun DetailScreen(
             ){
                 SectionText("EnglishVocab")
                 Text(
-                    data[0],
+                    vocabData.vocab.toString(),
                     fontFamily = InterFamily,
                     fontWeight = FontWeight.Bold,
                     fontSize = 28.sp,
                 )
                 SectionText("Indonesia Meaning")
                 Text(
-                    data[1],
+                    vocabData.meaning.toString(),
                     fontFamily = InterFamily,
                     fontWeight = FontWeight.Bold,
                     fontSize = 28.sp,
@@ -90,7 +87,7 @@ fun DetailScreen(
                         modifier = modifier.width(4.dp)
                     )
                     Text(
-                        data[1],
+                        vocabData.sentence.toString(),
                         fontFamily = InterFamily,
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
@@ -125,5 +122,12 @@ fun DetailScreen(
 @Preview(showBackground = true)
 @Composable
 fun DetailScreenPreview(){
-    DetailScreen()
+    DetailScreen(
+        vocabData = VocabData(
+            1,
+            "test",
+            "test",
+            "test"
+        )
+    )
 }

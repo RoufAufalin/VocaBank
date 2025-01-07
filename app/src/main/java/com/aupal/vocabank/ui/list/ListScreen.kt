@@ -1,6 +1,7 @@
 package com.aupal.vocabank.ui.list
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,6 +32,8 @@ fun ListScreen(
             Injection.provideRepository(LocalContext.current)
         )
     ),
+    modifier: Modifier = Modifier,
+    navigateToDetail: (VocabData) -> Unit
 ){
     val vocabState by viewModel.vocabState
 
@@ -40,7 +44,7 @@ fun ListScreen(
     Log.d("ListScreen", "vocabState: $vocabState")
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
 
@@ -52,7 +56,7 @@ fun ListScreen(
                 val data = (vocabState as UiState.Success<List<VocabData>>).data
 
                 Log.d("ListScreen", "data: $data")
-                ListScreen(data)
+                ListContent(data, navigateToDetail)
 
             }
 
@@ -66,9 +70,10 @@ fun ListScreen(
 }
 
 @Composable
-fun ListScreen(
+fun ListContent(
     data: List<VocabData>,
-    modifier: Modifier = Modifier
+    navigateToDetail: (VocabData) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -76,7 +81,12 @@ fun ListScreen(
         contentPadding = PaddingValues(16.dp)
     ) {
         items(data) { data ->
-            VocabItem(data)
+            VocabItem(
+                data,
+                modifier = modifier.clickable {
+                    navigateToDetail(data)
+                }
+            )
         }
     }
 
