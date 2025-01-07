@@ -33,7 +33,7 @@ fun ListScreen(
         )
     ),
     modifier: Modifier = Modifier,
-    navigateToDetail: (VocabData) -> Unit
+    navigateToDetail: (String, VocabData) -> Unit
 ){
     val vocabState by viewModel.vocabState
 
@@ -72,7 +72,7 @@ fun ListScreen(
 @Composable
 fun ListContent(
     data: List<VocabData>,
-    navigateToDetail: (VocabData) -> Unit,
+    navigateToDetail: (String, VocabData) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -84,7 +84,7 @@ fun ListContent(
             VocabItem(
                 data,
                 modifier = modifier.clickable {
-                    navigateToDetail(data)
+                    navigateToDetail(data.vocab!!, data)
                 }
             )
         }

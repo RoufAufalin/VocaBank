@@ -38,82 +38,90 @@ import com.aupal.vocabank.ui.theme.InterFamily
 @Composable
 fun DetailScreen(
     vocabData: VocabData,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ){
-    Column(
+    Box(
         modifier = modifier.fillMaxSize()
     ) {
-        Card(
-            colors = CardDefaults.cardColors(Color.White),
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 2.dp
-            ),
+        Column(
+            modifier = modifier.fillMaxSize()
         ) {
-            Column(
+            Card(
+                colors = CardDefaults.cardColors(Color.White),
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 2.dp
+                ),
+            ) {
+                Column(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(8.dp)
+                ){
+                    SectionText("EnglishVocab")
+                    Text(
+                        vocabData.vocab.toString(),
+                        fontFamily = InterFamily,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 28.sp,
+                    )
+                    SectionText("Indonesia Meaning")
+                    Text(
+                        vocabData.meaning.toString(),
+                        fontFamily = InterFamily,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 28.sp,
+                    )
+                    SectionText("Example Sentence")
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = modifier.fillMaxWidth()
+                            .padding(bottom = 8.dp)
+                    ) {
+                        Icon(
+                            Icons.Default.ArrowForward,
+                            contentDescription = null,
+                            modifier = modifier.size(10.dp)
+                        )
+                        Spacer(
+                            modifier = modifier.width(4.dp)
+                        )
+                        Text(
+                            vocabData.sentence.toString(),
+                            fontFamily = InterFamily,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                        )
+                    }
+
+                }
+            }
+
+            Spacer(
+                modifier = modifier.height(16.dp)
+            )
+
+            Button(
+                onClick = {
+                    navigateBack()
+                },
+                content = {
+                    Text("Back")
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
+                shape = RectangleShape,
                 modifier = modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
+                    .padding(top = 16.dp)
                     .padding(8.dp)
-            ){
-                SectionText("EnglishVocab")
-                Text(
-                    vocabData.vocab.toString(),
-                    fontFamily = InterFamily,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp,
-                )
-                SectionText("Indonesia Meaning")
-                Text(
-                    vocabData.meaning.toString(),
-                    fontFamily = InterFamily,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp,
-                )
-                SectionText("Example Sentence")
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = modifier.fillMaxWidth()
-                        .padding(bottom = 8.dp)
-                ) {
-                    Icon(
-                        Icons.Default.ArrowForward,
-                        contentDescription = null,
-                        modifier = modifier.size(10.dp)
-                    )
-                    Spacer(
-                        modifier = modifier.width(4.dp)
-                    )
-                    Text(
-                        vocabData.sentence.toString(),
-                        fontFamily = InterFamily,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp,
-                    )
-                }
-
-            }
+            )
         }
 
-        Spacer(
-            modifier = modifier.height(16.dp)
-        )
-
-        Button(
-            onClick = {  },
-            content = {
-                Text("Submit")
-            },
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-            shape = RectangleShape,
-            modifier = modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .padding(top = 16.dp)
-                .padding(8.dp)
-        )
     }
 
 
@@ -128,6 +136,7 @@ fun DetailScreenPreview(){
             "test",
             "test",
             "test"
-        )
+        ),
+        navigateBack = {}
     )
 }

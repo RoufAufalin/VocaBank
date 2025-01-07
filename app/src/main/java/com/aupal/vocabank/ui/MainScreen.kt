@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -22,14 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.aupal.vocabank.data.VocabData
 import com.aupal.vocabank.ui.about.AboutScreen
 import com.aupal.vocabank.ui.add.AddScreen
-import com.aupal.vocabank.ui.detail.DetailScreen
 import com.aupal.vocabank.ui.list.ListScreen
 import com.aupal.vocabank.ui.tabItem.ScreenData
 import com.aupal.vocabank.ui.theme.InterFamily
@@ -37,22 +31,15 @@ import com.aupal.vocabank.ui.theme.VocabankTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun VocabankApp(
+fun MainScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    navigateToDetail: (String, VocabData) -> Unit,
 ){
-    Scaffold(
-        modifier = modifier
-            .fillMaxSize()
-    ){ paddingValues ->
 
         val tabs = listOf(
             ScreenData("Add") { AddScreen() },
             ScreenData("Vocabulary") { ListScreen(
-                navigateToDetail = { vocab ->
-                    navController.currentBackStackEntry?.savedStateHandle?.set("vocabData", vocab)
-                    navController.navigate("detail")
-                }
+                navigateToDetail = navigateToDetail
             ) },
             ScreenData("About") { AboutScreen() },
         )
@@ -73,7 +60,6 @@ fun VocabankApp(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(paddingValues)
         ) {
             TabRow(
                 selectedTabIndex = selectedTabIndex,
@@ -117,18 +103,19 @@ fun VocabankApp(
             }
         }
 
-    }
-
 
 }
 
 @Preview(showBackground = true)
 @Composable
-fun VocabankAppPreview(){
+fun MainScreenPreview(){
     VocabankTheme(
         dynamicColor = false
     ) {
-
-        VocabankApp()
+        MainScreen(
+            navigateToDetail = {
+                    vocab, data ->
+            }
+        )
     }
 }
